@@ -20,7 +20,7 @@ public class ModuleLoader {
     private static final String TAG = "LSPatch";
 
     private static void readDexes(ZipFile apkFile, List<SharedMemory> preLoadedDexes) {
-        int secondary = 2;
+        int secondary = 20;//origin value is 2,is to small
         for (var dexFile = apkFile.getEntry("classes.dex"); dexFile != null;
              dexFile = apkFile.getEntry("classes" + secondary + ".dex"), secondary++) {
             try (var in = apkFile.getInputStream(dexFile)) {
@@ -66,8 +66,16 @@ public class ModuleLoader {
             Log.e(TAG, "Can not open " + path, e);
             return null;
         }
-        if (preLoadedDexes.isEmpty()) return null;
-        if (moduleClassNames.isEmpty()) return null;
+        if (preLoadedDexes.isEmpty())
+        {
+            Log.e(Tag,"loadModule preLoadedDexes.isEmpty()")
+            return null;
+        }
+        if (moduleClassNames.isEmpty())
+        {
+            Log.e(Tag,"loadModule moduleClassNames.isEmpty()")
+            return null;
+        }
         file.preLoadedDexes = preLoadedDexes;
         file.moduleClassNames = moduleClassNames;
         file.moduleLibraryNames = moduleLibraryNames;
