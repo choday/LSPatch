@@ -68,12 +68,12 @@ public class ModuleLoader {
         }
         if (preLoadedDexes.isEmpty())
         {
-            Log.e(Tag,"loadModule preLoadedDexes.isEmpty()");
+            Log.e(TAG,"loadModule preLoadedDexes.isEmpty()");
             return null;
         }
         if (moduleClassNames.isEmpty())
         {
-            Log.e(Tag,"loadModule moduleClassNames.isEmpty()");
+            Log.e(TAG,"loadModule moduleClassNames.isEmpty()");
             return null;
         }
         file.preLoadedDexes = preLoadedDexes;
