@@ -77,7 +77,8 @@ public class RemoteApplicationService implements ILSPApplicationService {
             if (!success) throw new TimeoutException("Bind service timeout");
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InterruptedException | TimeoutException e) {
             Log.e(TAG,e.toString());
-            Toast.makeText(context, "Manager died", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Manager died", Toast.LENGTH_SHORT).show();
+            //when latch.await timeout,Toast will Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'android.content.Context android.app.Application.getApplicationContext()' on a null object reference
             var r = new RemoteException("Failed to get manager binder");
             r.initCause(e);
             throw r;
