@@ -38,7 +38,11 @@ public class ModuleLoader {
 
     private static void readName(ZipFile apkFile, String initName, List<String> names) {
         var initEntry = apkFile.getEntry(initName);
-        if (initEntry == null) return;
+        if (initEntry == null)
+        {
+            Log.e(TAG,"loadModule can not getEntry "+initName);
+            return;
+        }
         try (var in = apkFile.getInputStream(initEntry)) {
             var reader = new BufferedReader(new InputStreamReader(in));
             String name;
@@ -53,7 +57,11 @@ public class ModuleLoader {
     }
 
     public static PreLoadedApk loadModule(String path) {
-        if (path == null) return null;
+        if (path == null)
+        {
+            Log.e(TAG,"loadModule path == null");
+            return null;
+        }
         var file = new PreLoadedApk();
         var preLoadedDexes = new ArrayList<SharedMemory>();
         var moduleClassNames = new ArrayList<String>(1);

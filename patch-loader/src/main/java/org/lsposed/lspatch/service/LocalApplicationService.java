@@ -50,6 +50,13 @@ public class LocalApplicationService extends ILSPApplicationService.Stub {
                 module.apkPath = cacheApkPath;
                 module.packageName = packageName;
                 module.file = ModuleLoader.loadModule(cacheApkPath);
+                if(module.file==null)
+                {
+                    Log.e(TAG,"error ModuleLoader.loadModule:"+cacheApkPath);
+                    //pass exception and will cause crash to notify load error;
+                }
+
+
                 modules.add(module);
             }
         } catch (IOException e) {
